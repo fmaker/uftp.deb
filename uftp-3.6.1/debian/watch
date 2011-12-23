@@ -1,2 +1,2 @@
 version=3
-http://www.tcnj.edu/~bush/downloads/uftp-(.+)\.tar
+http://www.tcnj.edu/~bush/downloads/uftp-([\d\.]+)\.tar
