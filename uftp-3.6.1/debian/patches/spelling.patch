@@ -1,0 +1,17 @@
+Corrects spelling mistakes
+
+Index: uftp-3.5.1/client_announce.c
+===================================================================
+--- uftp-3.5.1.orig/client_announce.c	2011-12-18 22:58:43.055699469 -0800
++++ uftp-3.5.1/client_announce.c	2011-12-18 22:59:23.625493414 -0800
+@@ -865,8 +865,8 @@
+     if (group_list[listidx].restart) {
+         if (group_list[listidx].sync_mode) {
+             log0(group_list[listidx].group_id, 0,
+-                    "Sync mode and restart mode incompatable");
+-            send_abort(listidx, "Sync mode and restart mode incompatable");
++                    "Sync mode and restart mode incompatible");
++            send_abort(listidx, "Sync mode and restart mode incompatible");
+             return;
+         }
+         read_restart_file(listidx);
