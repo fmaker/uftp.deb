@@ -1,0 +1,12 @@
+718b71f2418d58a149e54334989fd6e9  usr/bin/uftp
+902f69f031c204900ed05ea19b9bbcd3  usr/bin/uftp_keymgt
+2a732b5188e36331c1b14dad97aeabcc  usr/sbin/uftpd
+ba1b5f2665423a9b0c83a724eb90ff79  usr/sbin/uftpproxyd
+3d173969faf96f807bed1e56e9d02970  usr/share/doc/uftp/ReadMe.txt.gz
+8d63695949b3c73d8d82741c694cbe43  usr/share/doc/uftp/changelog.Debian.gz
+cf88e3d151c6d8025fb333bdfe19986a  usr/share/doc/uftp/changelog.gz
+0ff535ba2ce0991ab1b070a8942a245e  usr/share/doc/uftp/copyright
+5706c39d4e5788f7100d49be38718927  usr/share/man/man1/uftp.1.gz
+744a9264c35ef153d7e3642ceb3a6ba8  usr/share/man/man1/uftp_keymgt.1.gz
+adf88a34c809a36169260289213887a4  usr/share/man/man1/uftpd.1.gz
+827349bed2cba0a5ecb26f5a26846767  usr/share/man/man1/uftpproxyd.1.gz

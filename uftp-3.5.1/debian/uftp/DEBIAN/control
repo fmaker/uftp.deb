@@ -1,0 +1,15 @@
+Package: uftp
+Version: 3.5.1-1
+Architecture: amd64
+Maintainer: Frank Maker <frank.maker@gmail.com>
+Installed-Size: 444
+Depends: libc6 (>= 2.4), libssl0.9.8 (>= 0.9.8m-1)
+Section: net
+Priority: optional
+Homepage: http://www.tcnj.edu/~bush/uftp.html
+Description: Encrypted multicast file transfer program
+ Encrypted multicast file transfer program, designed to securely, reliably, and
+ efficiently transfer files to multiple receivers simultaneously. This is useful
+ for distributing large files to a large number of receivers, and is especially
+ useful for data distribution over a satellite link where the inherent delay
+ makes any TCP based communication highly inefficient.

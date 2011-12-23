@@ -1,0 +1,29 @@
+Fix binary file paths to conform to Linux Filesystem Hierarchy Standard (FHS)
+
+From: Frank Maker <frank.maker@gmail.com>
+Subject: Changed /bin installation path to /usr/bin according to FHS
+
+* makefile:  uftp and uftp_keymgt now installed to /usr/bin
+
+Author: Frank Maker <frank.maker@gmail.com>
+Bug-Debian: http://bugs.debian.org/650865
+Index: uftp-3.5.1/makefile
+===================================================================
+--- uftp-3.5.1.orig/makefile	2011-12-03 21:24:32.620414939 -0800
++++ uftp-3.5.1/makefile	2011-12-03 21:24:38.610414937 -0800
+@@ -191,12 +191,12 @@
+ 	$(CC) $(OPTIONS) $(INCLUDE) $(CFLAGS) -c $<
+ 
+ install:
+-	install -m 755 -d $(DESTDIR)/bin
++	install -m 755 -d $(DESTDIR)/usr/bin
+ 	install -m 755 -d $(DESTDIR)/usr/sbin
+ 	install -m 755 -d $(DESTDIR)/usr/share/man/man1
+-	/bin/cp -p uftp $(DESTDIR)/bin
++	/bin/cp -p uftp $(DESTDIR)/usr/bin
+ 	/bin/cp -p uftpd $(DESTDIR)/usr/sbin
+ 	/bin/cp -p uftpproxyd $(DESTDIR)/usr/sbin
+-	/bin/cp -p uftp_keymgt $(DESTDIR)/bin
++	/bin/cp -p uftp_keymgt $(DESTDIR)/usr/bin
+ 	/bin/cp -p uftp.1 uftpd.1 uftpproxyd.1 uftp_keymgt.1 $(DESTDIR)/usr/share/man/man1
+ 

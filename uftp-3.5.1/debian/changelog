@@ -1,0 +1,7 @@
+uftp (3.5.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #650865)
+  * Repackaged .tar to .tar.gz tarball
+  * Adjusted the Makefile to conform to FHS
+
+ -- Frank Maker <frank.maker@gmail.com>  Sat, 26 Nov 2011 19:52:57 -0800
