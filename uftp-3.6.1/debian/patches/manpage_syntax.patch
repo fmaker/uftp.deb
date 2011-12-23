@@ -1,0 +1,54 @@
+--- a/uftp.1
++++ b/uftp.1
+@@ -119,9 +119,9 @@
+ Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+ 
+ On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
+-
++.nf
+ HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
+-
++.fi
+ Not currently supported on Windows Vista or later.
+ .TP
+ .B \-z
+@@ -150,9 +150,9 @@
+ rejected: The file was rejected, because the file was sent with an absolute pathname and either the client is using a temp directory or the filename doesn\(aqt match one of the client\(aqs destination directories.
+ 
+ The following is printed at the end of the session:
+-
++.nf
+ STATS;target;num_copy;num_overwrite;num_skip;total_size;time;speed
+-
++.fi
+ Where "target" is the name of the client, "num_copy" is the number of files sentwith "copy" status, "num_overwrite" is the number of files sent with "overwrite" status, "num_skip" is the number of files sent with "skipped" status, "total_size" is the total size of all files sent in kilobytes, "time" is the total transmission time for all files, and "speed" is the overall transmission speed for all files.
+ 
+ Also, the following line is printed verbatim prior to the STATS lines for ease of reading:
+--- a/uftpd.1
++++ b/uftpd.1
+@@ -44,9 +44,9 @@
+ Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+ 
+ On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
+-
++.nf
+ HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
+-
++.fi
+ Not currently supported on Windows Vista or later.
+ .TP
+ .B \-x log_level
+--- a/uftpproxyd.1
++++ b/uftpproxyd.1
+@@ -279,9 +279,9 @@
+ Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+ 
+ On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
+-
++.nf
+ HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
+-
++.fi
+ Not currently supported on Windows Vista or later.
+ .TP
+ .B \-P pidfile
