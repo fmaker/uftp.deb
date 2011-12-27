@@ -1,6 +1,5 @@
 Changed to literals to allows reflowing and corrected hyphens
 
-
 Index: uftp-3.5.1/uftp.1
 ===================================================================
 --- uftp-3.5.1.orig/uftp.1	2011-12-18 23:21:48.848685861 -0800

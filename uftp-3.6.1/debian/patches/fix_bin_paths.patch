@@ -1,4 +1,6 @@
-Fix binary file paths to conform to Linux Filesystem Hierarchy Standard (FHS)
+Description: Fix binary file paths to conform to Linux Filesystem Hierarchy Standard
+Forwarded: not-needed
+Author: Frank Maker <frank.maker@gmail.com>
 
 --- a/makefile
 +++ b/makefile

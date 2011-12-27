@@ -10,9 +10,9 @@ Package: uftp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Encrypted multicast file transfer program
- Encrypted multicast file transfer program, designed to securely, reliably, and
- efficiently transfer files to multiple receivers simultaneously. This is useful
- for distributing large files to a large number of receivers, and is especially
- useful for data distribution over a satellite link where the inherent delay
- makes any TCP based communication highly inefficient.
+ Utility for secure, reliable, and efficient file transfer to multiple
+ receivers simultaneously.  This is useful for distributing large files to a
+ large number of receivers, and is especially useful for data distribution over
+ a satellite link where the inherent delay makes any TCP based communication
+ highly inefficient.
  

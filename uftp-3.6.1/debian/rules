@@ -12,9 +12,6 @@
 %:
 	dh $@ 
 
-override_dh_installchangelogs:
-	dh_installchangelogs -k Changes.txt
-
 override_dh_installdocs:
 	dh_installdocs -X LICENSE.txt
 

@@ -191,12 +191,12 @@ uftp_keymgt: $(UFTP_KEYMGT_OBJS)
 	$(CC) $(OPTIONS) $(INCLUDE) $(CFLAGS) -c $<
 
 install:
-	install -m 755 -d $(DESTDIR)/usr/bin
+	install -m 755 -d $(DESTDIR)/bin
 	install -m 755 -d $(DESTDIR)/usr/sbin
 	install -m 755 -d $(DESTDIR)/usr/share/man/man1
-	/bin/cp -p uftp $(DESTDIR)/usr/bin
+	/bin/cp -p uftp $(DESTDIR)/bin
 	/bin/cp -p uftpd $(DESTDIR)/usr/sbin
 	/bin/cp -p uftpproxyd $(DESTDIR)/usr/sbin
-	/bin/cp -p uftp_keymgt $(DESTDIR)/usr/bin
+	/bin/cp -p uftp_keymgt $(DESTDIR)/bin
 	/bin/cp -p uftp.1 uftpd.1 uftpproxyd.1 uftp_keymgt.1 $(DESTDIR)/usr/share/man/man1
 

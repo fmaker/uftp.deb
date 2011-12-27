@@ -1,3 +1,5 @@
+Disable flowing on lines which cause man error
+
 --- a/uftp.1
 +++ b/uftp.1
 @@ -119,9 +119,9 @@
