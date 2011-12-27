@@ -1,0 +1,10 @@
+# Defaults for test initscript
+# sourced by /etc/init.d/uftp
+# installed at /etc/default/uftp by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Additional options that are passed to the Daemon.
+DAEMON_OPTS="-L /var/log/uftp.log"
