@@ -1,0 +1,18 @@
+Disabling line adjustment
+
+Index: uftp-3.6.1/uftpproxyd.1
+===================================================================
+--- uftp-3.6.1.orig/uftpproxyd.1	2012-01-07 11:19:42.927306038 -0800
++++ uftp-3.6.1/uftpproxyd.1	2012-01-07 11:21:05.506496302 -0800
+@@ -279,9 +279,9 @@
+ Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+ 
+ On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
+-
++.na
+ HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
+-
++.ad
+ Not currently supported on Windows Vista or later.
+ .TP
+ .B \-P pidfile

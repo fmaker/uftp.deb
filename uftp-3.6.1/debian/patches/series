@@ -1,3 +1,4 @@
+manpage_adjust_line.patch
 fix_bin_paths.patch
 spelling.patch
-manpage_syntax.patch
+fix_minus_hyphen.patch

@@ -2,8 +2,8 @@ uftp (3.6.1-1) unstable; urgency=low
 
   * Initial release (Closes: #650865)
   * Repackaged .tar to .tar.gz tarball
-  * Adjusted the Makefile to conform to FHS
+  * Adjusted the executable paths to conform to FHS
   * Fixed minor spelling mistakes
-  * Corrected manpages to resolve "cannot adjust line" errors 
+  * Corrected manpages to resolve "cannot adjust line" errors
 
  -- Frank Maker <frank.maker@gmail.com>  Sat, 26 Nov 2011 19:52:57 -0800

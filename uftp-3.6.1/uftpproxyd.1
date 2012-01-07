@@ -2,17 +2,17 @@
 .SH NAME
 uftpproxyd - Encrypted UDP based ftp with multicast - proxy daemon
 .SH SYNOPSIS
-uftpproxyd { -s { dest | fp=fingerprint } | -c | -r } [ -d ]
-    [ -n ] [ -p port ] [ -t ttl ] [ -Q dscp ]
-    [ -N priority ] [ -O out_multi_interface ]
-    [ -U UID ] [ -q dest_port ]
-    [ -T interval_pct ] [ -m ] [ -x log_level ]
-    [ -H hb_server[:port][,hb_server[:port]...] ]
-    [ -h hb_interval ] [ -B udp_buf_size ] [ -L logfile ]
-    [ -P pidfile ] [ -C clientlist_file ]
-    [ -S serverlist_file ] [ -k keyfile[,keyfile...] ]
-    [ -K new_key_length ] [ -I interface[,interface...] ]
-    [ -M pub_mcast_addr[,pub_mcast_addr...] ]
+uftpproxyd { \-s { dest | fp=fingerprint } | \-c | \-r } [ \-d ]
+    [ \-n ] [ \-p port ] [ \-t ttl ] [ \-Q dscp ]
+    [ \-N priority ] [ \-O out_multi_interface ]
+    [ \-U UID ] [ \-q dest_port ]
+    [ \-T interval_pct ] [ \-m ] [ \-x log_level ]
+    [ \-H hb_server[:port][,hb_server[:port]...] ]
+    [ \-h hb_interval ] [ \-B udp_buf_size ] [ \-L logfile ]
+    [ \-P pidfile ] [ \-C clientlist_file ]
+    [ \-S serverlist_file ] [ \-k keyfile[,keyfile...] ]
+    [ \-K new_key_length ] [ \-I interface[,interface...] ]
+    [ \-M pub_mcast_addr[,pub_mcast_addr...] ]
 .SH DESCRIPTION
 .P
 uftpproxyd is the proxy daemon of the UFTP suite.  It performs multicast tunneling, NAT traversal, and client response aggregation.  It is used in one of two scenarios.  The first is when the server and one or more clients are on separate networks and cannot be reached directly via multicast, and/or one or both sides are behind a firewall or NAT\(aqed.  This allows applications to function when there is little to no access to routers.  The second is when the server can contact clients directly but there are too many of them to directly handle the responses.  This allows greater scalability.
@@ -181,8 +181,8 @@ x | |  ------------------  x    x  |   ------------------  x
 x | |  | Response Proxy |  x    x  |   | Response Proxy |  x
 x | |  ------------------  x    x  |   ------------------  x
 x | |    |       ^         x    x  |           ^           x
-x |/|\\----       |         x    x  |           |           x
-x   |            |         x  --x-/|\\-----------           x
+x |/|\----       |         x    x  |           |           x
+x   |            |         x  -\-x-/|\-----------           x
 x   |            |         x  | x  |                       x
 x   |            |         x  | x  |                       x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxx  | xxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -212,16 +212,16 @@ In Figure 4, each proxy is at least one hop away from the clients it serves, and
 The following options are supported:
 .TP
 .B \-s { dest | fp=fingerprint }
-Sets up the proxy as a server proxy.  If dest is specified, this is the name/IP of the downstream client proxy.  If fingerprint is specified, this designates the public key signature of the downstream proxy.  When this proxy gets a heartbeat message signed with the matching key, it will use the source IP:port of the heartbeat for its downstream address.  Exactly one of -s, -c, or -r must be specified.
+Sets up the proxy as a server proxy.  If dest is specified, this is the name/IP of the downstream client proxy.  If fingerprint is specified, this designates the public key signature of the downstream proxy.  When this proxy gets a heartbeat message signed with the matching key, it will use the source IP:port of the heartbeat for its downstream address.  Exactly one of \-s, \-c, or \-r must be specified.
 .TP
 .B \-c
-Sets up the proxy as a client proxy.  Exactly one of -s, -c, or -r must be specified.
+Sets up the proxy as a client proxy.  Exactly one of \-s, \-c, or \-r must be specified.
 .TP
 .B \-r
-Sets up the proxy as a response proxy.  Exactly one of -s, -c, or -r must be specified.
+Sets up the proxy as a response proxy.  Exactly one of \-s, \-c, or \-r must be specified.
 .TP
 .B \-d
-Enable debug mode.  The process will run in the foreground and all output will go to stderr.  If specified, the -L option is ignored.
+Enable debug mode.  The process will run in the foreground and all output will go to stderr.  If specified, the \-L option is ignored.
 .TP
 .B \-n
 Prevents name lookups of servers, clients, or other proxies when receiving messages.  Useful if name resolution takes a long time and delays message forwarding.  This option does NOT prevent name lookups for clients, servers, or proxies specified by any other command line options.
@@ -233,17 +233,17 @@ The UDP port number to listen on.  Default is 1044.
 Specifies the time-to-live for multicast packets.  Default is 1.
 .TP
 .B \-N priority
-Sets the process priority.  On Windows systems, valid values are from -2 to 2, with a default of 0.  These correspond to the following priorities:
+Sets the process priority.  On Windows systems, valid values are from \-2 to 2, with a default of 0.  These correspond to the following priorities:
 
 .nf
--2 High
--1 Above Normal
+\-2 High
+\-1 Above Normal
  0 Normal
  1 Below Normal
  2 Low
 .fi
 
-On all other systems, this is the "nice" value.  Valid values are from -20 to 19, where -20 is the highest priority and 19 is the lowest priority.  Default is 0.
+On all other systems, this is the "nice" value.  Valid values are from \-20 to 19, where \-20 is the highest priority and 19 is the lowest priority.  Default is 0.
 .TP
 .B \-O out_multi_interface
 The interface to send the data from.  Can be specified either by interface name, by hostname, or by IP.  If not specified, the default system interface is used.  Applies only to client proxies.
@@ -255,33 +255,33 @@ The unique ID for this proxy.  May be specified either as a 6 digit hexadecimal 
 The port number of the downstream proxy (for server proxies) or clients (for client proxies).
 .TP
 .B \-T interval_pct
-Specifies the percentage of the announce interval (for REGISTERs) or status interval (for STATUSes or COMPLETEs) to wait after receiving the first client response before sending an aggregate response upstream.  Valid values are 10-99.  Defaults to 50.  Applies only to client proxies.
+Specifies the percentage of the announce interval (for REGISTERs) or status interval (for STATUSes or COMPLETEs) to wait after receiving the first client response before sending an aggregate response upstream.  Valid values are 10\(hy99.  Defaults to 50.  Applies only to client proxies.
 .TP
 .B \-m
 For Windows systems using CryptoAPI, private keys are normally stored in the key container of the running user.  Specifying this option stores keys in the system key container.  Useful when running as a service.  On non-Windows systems, this option has no effect.
 .TP
 .B \-x log_level
-Specifies current logging level.  Valid values are 0-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
+Specifies current logging level.  Valid values are 0\-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
 .TP
-.B -H hb_server[:port][,hb_server[:port]...]
-Lists one or more proxies to send heartbeat messages to.  When sending a signed heartbeat message, the first key listed under -k is used to sign the message.  If port is not specified for a given proxy, the default port of 1044 is assumed.
+.B \-H hb_server[:port][,hb_server[:port]...]
+Lists one or more proxies to send heartbeat messages to.  When sending a signed heartbeat message, the first key listed under \-k is used to sign the message.  If port is not specified for a given proxy, the default port of 1044 is assumed.
 .TP
-.B -h hb_interval
-The time in seconds between sending heartbeat messages.  Ignored if -H is not specified.
+.B \-h hb_interval
+The time in seconds between sending heartbeat messages.  Ignored if \-H is not specified.
 .TP
 .B \-B buf_size
-The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536-104857600 (64KB-100MB).  Defaults to 262144.
+The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536\(hy104857600 (64KB\(hy100MB).  Defaults to 262144.
 .TP
 .B \-L logfile
 Specifies the log file.  Default is /tmp/uftpproxyd.log for UNIX-like systems systems, C:\\uftpproxyd_log.txt for Windows.
 .TP
 .B \-Q dscp
-Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0\(hy63 and may be specified in either decimal or hexadecimal.  Default is 0.
 
 On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
-
+.na
 HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
-
+.ad
 Not currently supported on Windows Vista or later.
 .TP
 .B \-P pidfile
@@ -296,9 +296,9 @@ Example contents:
 .fi
 .TP
 .B \-S serverlist_file
-A file containing a list of servers.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  For client proxies, this is the list of servers the proxy will allow to connect, and the key specified by the server must match the fingerprint.  For server proxies, ff your system supports source specific multicast (SSM), the proxy will subscribe to all public and private multicast addresses using SSM for all servers listed.  See -C for the syntax of the file.
+A file containing a list of servers.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  For client proxies, this is the list of servers the proxy will allow to connect, and the key specified by the server must match the fingerprint.  For server proxies, ff your system supports source specific multicast (SSM), the proxy will subscribe to all public and private multicast addresses using SSM for all servers listed.  See \-C for the syntax of the file.
 
-When this option is specified, the public address given by -M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0-232.255.255.255.
+When this option is specified, the public address given by \-M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0\(hy232.255.255.255.
 
 .TP
 .B \-k keyfile[,keyfile...]
@@ -306,19 +306,19 @@ When this option is specified, the public address given by -M must be a valid SS
 .B \-K new_key_length
 These two options are used to read and/or write the proxy\(aqs RSA private key.
 
-If neither -k nor -K are specified, an RSA private key 512 bytes in length is generated.
+If neither \-k nor \-K are specified, an RSA private key 512 bytes in length is generated.
 
-If -k is specified but not -K, the RSA private keys are read from each keyfile.
+If \-k is specified but not \-K, the RSA private keys are read from each keyfile.
 
-If -k is not specified but -K is, an RSA private key new_key_length bytes in length is generated.
+If \-k is not specified but \-K is, an RSA private key new_key_length bytes in length is generated.
 
-If both -k and -K are specified, an RSA private key new_key_length bytes in length is generated and stored in the first keyfile, and subsequent key files are ignored.
+If both \-k and \-K are specified, an RSA private key new_key_length bytes in length is generated and stored in the first keyfile, and subsequent key files are ignored.
 
 The definition of keyfile is dependent on the crypto library UFTP is compiled to use.
 
-On Windows systems using the native crypto library (CryptoAPI), all RSA private keys must be stored in a key container (technically only keys used to sign data, but for UFTP\(aqs purposes this is the case).  Key containers are internal to Windows, and each user (and the system) has its own set of key containers.  In this case, keyfile is actually the name of the key container.  When -k is not specified, the generated key is stored in a default key container.  Note that if more than one server, client, and/or proxy use this default key container on the same machine, they will interfere with each other and the results are undefined.
+On Windows systems using the native crypto library (CryptoAPI), all RSA private keys must be stored in a key container (technically only keys used to sign data, but for UFTP\(aqs purposes this is the case).  Key containers are internal to Windows, and each user (and the system) has its own set of key containers.  In this case, keyfile is actually the name of the key container.  When \-k is not specified, the generated key is stored in a default key container.  Note that if more than one server, client, and/or proxy use this default key container on the same machine, they will interfere with each other and the results are undefined.
 
-All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, keyfile specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).  When both -k and -K are specified, the file is only written to if it does not currently exist.  If the file does exist, an error message will be returned and the proxy will exit.  When -k is not specified, the generated key is not persisted.  Unlike CryptoAPI, servers, clients, and proxies will not step on each other in this case.  These PEM files may also be manipulated via the openssl(1) command line tool.
+All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, keyfile specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).  When both \-k and \-K are specified, the file is only written to if it does not currently exist.  If the file does exist, an error message will be returned and the proxy will exit.  When \-k is not specified, the generated key is not persisted.  Unlike CryptoAPI, servers, clients, and proxies will not step on each other in this case.  These PEM files may also be manipulated via the openssl(1) command line tool.
 
 Keys can also be generated and viewed via the uftp_keymgt(1) utility.
 .TP

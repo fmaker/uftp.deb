@@ -865,8 +865,8 @@ void handle_announce(struct sockaddr_in src, uint8_t version,
     if (group_list[listidx].restart) {
         if (group_list[listidx].sync_mode) {
             log0(group_list[listidx].group_id, 0,
-                    "Sync mode and restart mode incompatable");
-            send_abort(listidx, "Sync mode and restart mode incompatable");
+                    "Sync mode and restart mode incompatible");
+            send_abort(listidx, "Sync mode and restart mode incompatible");
             return;
         }
         read_restart_file(listidx);

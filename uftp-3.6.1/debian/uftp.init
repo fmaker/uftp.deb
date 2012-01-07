@@ -1,12 +1,13 @@
 #! /bin/sh
 
 ### BEGIN INIT INFO
-# Provides:          uftpd
+# Provides:          uftp
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      
 # Short-Description: Daemon for encrypted multicast file transfer
+# Description: Controls the client deamon for receiving uftp transfers
 ### END INIT INFO
 
 set -e

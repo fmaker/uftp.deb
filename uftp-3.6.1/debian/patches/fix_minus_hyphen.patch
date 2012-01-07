@@ -1,14 +1,12 @@
-Changed to literals to allows reflowing and corrected hyphens
+Changing hyphens to minuses to resolve hyphen-used-as-minus-sign lintian warning
 
-Index: uftp-3.5.1/uftp.1
+Index: uftp-3.6.1/uftp.1
 ===================================================================
---- uftp-3.5.1.orig/uftp.1	2011-12-18 23:21:48.848685861 -0800
-+++ uftp-3.5.1/uftp.1	2011-12-18 23:22:15.398551656 -0800
-@@ -1,22 +1,22 @@
- .TH uftp 1 "10 July 2011" "UFTP 3.5.1"
+--- uftp-3.6.1.orig/uftp.1	2012-01-07 12:01:06.517804195 -0800
++++ uftp-3.6.1/uftp.1	2012-01-07 12:01:11.357785120 -0800
+@@ -2,21 +2,21 @@
  .SH NAME
--uftp - Encrypted UDP based ftp with multicast - server
-+uftp \- Encrypted UDP based ftp with multicast \- server
+ uftp - Encrypted UDP based ftp with multicast - server
  .SH SYNOPSIS
 -uftp [ -U ] [ -R txrate ] [ -W txweight ] [ -m min_time ]
 -    [ -n ] [ -L logfile ] [ -B udp_buf_size ] [ -Y keytype ]
@@ -43,7 +41,7 @@ Index: uftp-3.5.1/uftp.1
  .SH DESCRIPTION
  .P
  uftp is the server process of the UFTP suite.  It sends one or more files to one or more receivers via multicast with optional encryption.
-@@ -26,13 +26,13 @@
+@@ -26,18 +26,18 @@
  The following options are supported:
  .TP
  .B \-U
@@ -56,11 +54,24 @@ Index: uftp-3.5.1/uftp.1
  .TP
  .B \-W txweight
 -Sets the maximum file transfer time, expressed as a percentage of the optimal time.  If a value of -1 is given for the -R option, a speed of 100Mpbs is used for the purpose of calculating the max time.  Valid values are 110%-10000%.  Default value is 300%.
-+Sets the maximum file transfer time, expressed as a percentage of the optimal time.  If a value of \-1 is given for the \-R option, a speed of 100Mpbs is used for the purpose of calculating the max time.  Valid values are 110%-10000%.  Default value is 300%.
++Sets the maximum file transfer time, expressed as a percentage of the optimal time.  If a value of \-1 is given for the \-R option, a speed of 100Mpbs is used for the purpose of calculating the max time.  Valid values are 110%\(hy10000%.  Default value is 300%.
+ 
+ When a congestion control file is in use, the transmission speed may change.  In this situation, the maximum time is calculated based on the current transmission speed at the time a given file in a session is started, which may vary from one file to the next.
  .TP
  .B \-m min_time
- Specifies the minimum file transfer time.  This value takes precedence over the maximum time, if it is greater.  Valid values are 0-3600 seconds.  Default value is 10 seconds.
-@@ -50,32 +50,32 @@
+-Specifies the minimum file transfer time.  This value takes precedence over the maximum time, if it is greater.  Valid values are 0-3600 seconds.  Default value is 10 seconds.
++Specifies the minimum file transfer time.  This value takes precedence over the maximum time, if it is greater.  Valid values are 0\(hy3600 seconds.  Default value is 10 seconds.
+ .TP
+ .B \-n
+ Prevents name lookups of clients and proxies under open group membership. Useful if name resolution takes a long time and delays receiving of the registration messages.  Names are still looked up under closed group membership, as this happens before any data starts moving.
+@@ -46,38 +46,38 @@
+ Specifies the log file.  Default is to write to stderr.
+ .TP
+ .B \-B buf_size
+-The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536-104857600 (64KB-100MB).  Defaults to 262144.
++The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536\(hy104857600 (64KB-100MB).  Defaults to 262144.
+ .TP
+ .B \-Y keytype
  The symmetric encryption algorithm to use.  All algorithms are used in cipher block chaining (CBC) mode.  Valid values are "des" for DES, "3des" for three key Triple DES, "aes128" for AES-128, "aes256" for AES-256, or "none" to not set up encryption at all.  Default is "none".  Not all installations may support all of these algorithms.
  .TP
  .B \-h hashtype
@@ -103,7 +114,7 @@ Index: uftp-3.5.1/uftp.1
  
  Keys can also be generated and viewed via the uftp_keymgt(1) utility.
  .TP
-@@ -83,7 +83,7 @@
+@@ -85,27 +85,27 @@
  Follow symbolic links.  By default, if the server encounters a symbolic link, it will send the link itself instead of the file it points to.  Specifying this flag causes the server to send the file the link points to.
  .TP
  .B \-T
@@ -111,18 +122,63 @@ Index: uftp-3.5.1/uftp.1
 +Print the timestamp on each line of output.  If \-L is specified, this option is implied.
  .TP
  .B \-A announce_time
- The maximum time in seconds that the server and client will spend in the Announce/Register phase or the File Info phase for each file.  Under open group membership, the server will always wait for this length of time during the Announce/Register phase to allow as many clients as possible to register.  Valid values are 1-240.  Default is 10 seconds.
-@@ -117,7 +117,7 @@
- Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+-The maximum time in seconds that the server and client will spend in the Announce/Register phase or the File Info phase for each file.  Under open group membership, the server will always wait for this length of time during the Announce/Register phase to allow as many clients as possible to register.  Valid values are 1-240.  Default is 10 seconds.
++The maximum time in seconds that the server and client will spend in the Announce/Register phase or the File Info phase for each file.  Under open group membership, the server will always wait for this length of time during the Announce/Register phase to allow as many clients as possible to register.  Valid values are 1\(hy240.  Default is 10 seconds.
+ .TP
+ .B \-S status_time
+-The maximum time in seconds that the server will wait for a client to respond to a DONE message before declaring the client dropped.  Also the maximum time a client will wait for the server to send a DONE_CONF in response to a COMPLETE at the end of a session.  Valid values are 1-240.  Default is 12 seconds.
++The maximum time in seconds that the server will wait for a client to respond to a DONE message before declaring the client dropped.  Also the maximum time a client will wait for the server to send a DONE_CONF in response to a COMPLETE at the end of a session.  Valid values are 1\(hy240.  Default is 12 seconds.
+ .TP
+ .B \-a announce_interval
+-The time in milliseconds that the server will idle waiting for REGISTER/CLIENT_KEY or INFO_ACK messages before resending an ANNOUNCE, REG_CONF, KEYINFO, or FILEINFO.  Valid values are 500-20000.  Defaults to 2500 milliseconds.
++The time in milliseconds that the server will idle waiting for REGISTER/CLIENT_KEY or INFO_ACK messages before resending an ANNOUNCE, REG_CONF, KEYINFO, or FILEINFO.  Valid values are 500\(hy20000.  Defaults to 2500 milliseconds.
+ .TP
+ .B \-s status_interval
+-The time in milliseconds that the server will idle waiting for STATUS or COMPLETE messages before resending a DONE or DONE_CONF.  Valid values are 500-20000.  Defaults to 4000 milliseconds.
++The time in milliseconds that the server will idle waiting for STATUS or COMPLETE messages before resending a DONE or DONE_CONF.  Valid values are 500\(hy20000.  Defaults to 4000 milliseconds.
+ .TP
+ .B \-r register_interval
+-The time in milliseconds that a client will idle waiting for a REG_CONF or KEYINFO before resending a REGISTER.  Valid values are 500-60000, and must be greater than announce_interval.  Defaults to 4000 milliseconds.
++The time in milliseconds that a client will idle waiting for a REG_CONF or KEYINFO before resending a REGISTER.  Valid values are 500\(hy60000, and must be greater than announce_interval.  Defaults to 4000 milliseconds.
+ 
+ The value specified for register_interval compared to announce_interval depends on network conditions and the number of expected clients.  Under high latency or with a large number (100s) of clients, it may take longer for a server to respond.  If register_interval is too low, clients could end up retransmitting more often than necessary and overwhelm the server.
+ .TP
+ .B \-d done_interval
+-The time in milliseconds that a client will idle waiting for a DONE_CONF before resending a COMPLETE.  Valid values are 500-60000, and must be greater than status_interval.  Defaults to 4000 milliseconds.
++The time in milliseconds that a client will idle waiting for a DONE_CONF before resending a COMPLETE.  Valid values are 500\(hy60000, and must be greater than status_interval.  Defaults to 4000 milliseconds.
+ 
+ The value specified for done_interval compared to status_interval depends on network conditions and the number of expected clients.  Under high latency or with a large number (100s) of clients, it may take longer for a server to respond.  If done_interval is too low, clients could end up retransmitting more often than necessary and overwhelm the server.
+ .TP
+@@ -116,12 +116,12 @@
+ Specifies the time-to-live for multicast packets.  Default is 1.
+ .TP
+ .B \-Q dscp
+-Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
++Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0\(hy63 and may be specified in either decimal or hexadecimal.  Default is 0.
  
  On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
 -
-+.na
++.nf
  HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
- 
+-
++.fi
  Not currently supported on Windows Vista or later.
-@@ -167,7 +167,7 @@
- The UDP port number to send from.  Default is 1044.
+ .TP
+ .B \-z
+@@ -150,9 +150,9 @@
+ rejected: The file was rejected, because the file was sent with an absolute pathname and either the client is using a temp directory or the filename doesn\(aqt match one of the client\(aqs destination directories.
+ 
+ The following is printed at the end of the session:
+-
++.nf
+ STATS;target;num_copy;num_overwrite;num_skip;total_size;time;speed
+-
++.fi
+ Where "target" is the name of the client, "num_copy" is the number of files sentwith "copy" status, "num_overwrite" is the number of files sent with "overwrite" status, "num_skip" is the number of files sent with "skipped" status, "total_size" is the total size of all files sent in kilobytes, "time" is the total transmission time for all files, and "speed" is the overall transmission speed for all files.
+ 
+ Also, the following line is printed verbatim prior to the STATS lines for ease of reading:
+@@ -169,7 +169,7 @@
+ The UDP port number to send to.  Default is 1044.
  .TP
  .B \-j proxylist_file
 -A file containing a list of proxies the server is expecting to hear from.  The file should contain the name/IP of a proxy optionally followed by the proxy\(aqs public key fingerprint, with one on each line.  If a key fingerprint is given, the key specified by the proxy must match the fingerprint.  This option should not be used without -H.  If -H is specified, -j must also be specified if proxies are expected to respond, otherwise the server will reject the proxies.
@@ -130,7 +186,7 @@ Index: uftp-3.5.1/uftp.1
  
  .nf
  Example contents:
-@@ -176,10 +176,10 @@
+@@ -178,16 +178,16 @@
  .fi
  .TP
  .B \-q
@@ -143,7 +199,14 @@ Index: uftp-3.5.1/uftp.1
  .TP
  .B \-y
  For Windows systems using CryptoAPI, private keys are normally stored in the key container of the running user.  Specifying this option stores keys in the system key container.  On non-Windows systems, this option has no effect.
-@@ -193,7 +193,7 @@
+ .TP
+ .B \-x log_level
+-Specifies current logging level.  Valid values are 0-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
++Specifies current logging level.  Valid values are 0\(hy5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
+ .TP
+ .B \-H { host[,host...] | @hostlist_file }
+ Specifies the clients for closed group membership.  Can be specified as either a comma separated list of names/addresses, or can be read from hostlist_file.  This file is in the same format as proxylist_file.  Note that key fingerprints cannot be specified using the comma separated syntax.  Clients that are behind a proxy do not need key fingerprints specified, since the proxy\(aqs key fingerprint will be checked instead.  If unspecified, open group membership is used, and any client may register.
+@@ -195,7 +195,7 @@
  Besides name/IP, clients may also be specified by unique ID.  This ID may be specified either as a 6 digit hexadecimal number (0xnnnnnn) or as an IP address of the form 0.n.n.n.
  .TP
  .B \-F restart_file
@@ -152,12 +215,12 @@ Index: uftp-3.5.1/uftp.1
  .TP
  .B \-X exclude_file
  A file containing the names of files/paths to be excluded from the session, one per line.  For example, if you send a directory called d1 containing subdirectories d2, d3, and d4, and you don\(aqt want to send the contents of d4, the exclude_file should contain a line reading "d1/d4".
-@@ -202,10 +202,10 @@
+@@ -204,10 +204,10 @@
  The public multicast address to announce on.  Default is 230.4.4.1.
  .TP
  .B \-P priv_multicast_addr
 -The private multicast address that the data is transferred to.  Any combination of the second, third, and fourth octets may be replaced with the letter \(aqx\(aq, resulting in a random number being chosen for that octet.  Default value is 230.5.5.x.  If clients are using source specific multicast (SSM), this and -M must specify valid SSM addresses, which fall in the range 232.0.0.0-232.255.255.255.
-+The private multicast address that the data is transferred to.  Any combination of the second, third, and fourth octets may be replaced with the letter \(aqx\(aq, resulting in a random number being chosen for that octet.  Default value is 230.5.5.x.  If clients are using source specific multicast (SSM), this and \-M must specify valid SSM addresses, which fall in the range 232.0.0.0-232.255.255.255.
++The private multicast address that the data is transferred to.  Any combination of the second, third, and fourth octets may be replaced with the letter \(aqx\(aq, resulting in a random number being chosen for that octet.  Default value is 230.5.5.x.  If clients are using source specific multicast (SSM), this and \-M must specify valid SSM addresses, which fall in the range 232.0.0.0\(hy232.255.255.255.
  .TP
  .B \-C cc_config
 -Specifies a congestion control config file.  Normally, the server always transmits at the speed specified by -R.  With this option, the speed can be adjusted each time the server makes a request for NAKs from the clients based on the percentage of NAKs received to data packets sent. The file consists of one or more of the following lines:
@@ -165,7 +228,16 @@ Index: uftp-3.5.1/uftp.1
  
  percentage;scaling_factor
  
-@@ -227,21 +227,21 @@
+@@ -219,7 +219,7 @@
+ 
+ max;speed
+ 
+-Where "speed" is the transmission speed in Kbps.  If this entry is not specified, the maximum speed is the initial speed specified by -R.
++Where "speed" is the transmission speed in Kbps.  If this entry is not specified, the maximum speed is the initial speed specified by \-R.
+ 
+ The congestion control config file is reread each time just before adjusting the rate.  This allows environments which externally monitor the network to adjust the configuration on the fly.  In the event of a failure to read the file, the last configuration successfully read is used.
+ 
+@@ -238,21 +238,21 @@
  .B \-o
  .TP
  .B \-D dest_name
@@ -192,7 +264,7 @@ Index: uftp-3.5.1/uftp.1
  .SH EXAMPLES
  .P
  Starting with the default options:
-@@ -255,12 +255,12 @@
+@@ -266,12 +266,12 @@
  If you were sending a file over a local LAN instead of satellite, you might call the server like this:
  
  .RS 5
@@ -207,7 +279,7 @@ Index: uftp-3.5.1/uftp.1
  
  To send multiple files:
  
-@@ -277,49 +277,49 @@
+@@ -288,49 +288,49 @@
  To send multiple files that all land in a certain subdirectory on each client:
  
  .RS 5
@@ -265,171 +337,47 @@ Index: uftp-3.5.1/uftp.1
  .RE
  .SH SEE ALSO
  uftpd(1), uftpproxyd(1), uftp_keymgt(1)
-Index: uftp-3.5.1/uftpproxyd.1
+Index: uftp-3.6.1/uftp_keymgt.1
 ===================================================================
---- uftp-3.5.1.orig/uftpproxyd.1	2011-12-18 23:21:48.828685963 -0800
-+++ uftp-3.5.1/uftpproxyd.1	2011-12-18 23:22:39.178431487 -0800
-@@ -1,17 +1,17 @@
- .TH uftpproxyd 1 "10 July 2011" "UFTP 3.5.1"
+--- uftp-3.6.1.orig/uftp_keymgt.1	2012-01-07 12:01:06.527804155 -0800
++++ uftp-3.6.1/uftp_keymgt.1	2012-01-07 12:01:11.357785120 -0800
+@@ -2,11 +2,11 @@
  .SH NAME
--uftpproxyd - Encrypted UDP based ftp with multicast - proxy daemon
-+uftpproxyd \- Encrypted UDP based ftp with multicast \- proxy daemon
+ uftp_keymgt - Encrypted UDP based ftp with multicast - key management utility
  .SH SYNOPSIS
--uftpproxyd { -s { dest | fp=fingerprint } | -c | -r } [ -d ]
--    [ -n ] [ -p port ] [ -t ttl ] [ -Q dscp ]
--    [ -O out_multi_interface ] [ -U UID ] [ -q dest_port ]
--    [ -T interval_pct ] [ -m ] [ -x log_level ]
--    [ -H hb_server[:port][,hb_server[:port]...] ]
--    [ -h hb_interval ] [ -B udp_buf_size ] [ -L logfile ]
--    [ -P pidfile ] [ -C clientlist_file ]
--    [ -S serverlist_file ] [ -k keyfile[,keyfile...] ]
--    [ -K new_key_length ] [ -I interface[,interface...] ]
--    [ -M pub_mcast_addr[,pub_mcast_addr...] ]
-+uftpproxyd { \-s { dest | fp=fingerprint } | \-c | \-r } [ \-d ]
-+    [ \-n ] [ \-p port ] [ \-t ttl ] [ \-Q dscp ]
-+    [ \-O out_multi_interface ] [ \-U UID ] [ \-q dest_port ]
-+    [ \-T interval_pct ] [ \-m ] [ \-x log_level ]
-+    [ \-H hb_server[:port][,hb_server[:port]...] ]
-+    [ \-h hb_interval ] [ \-B udp_buf_size ] [ \-L logfile ]
-+    [ \-P pidfile ] [ \-C clientlist_file ]
-+    [ \-S serverlist_file ] [ \-k keyfile[,keyfile...] ]
-+    [ \-K new_key_length ] [ \-I interface[,interface...] ]
-+    [ \-M pub_mcast_addr[,pub_mcast_addr...] ]
+-uftp_keymgt [ -m ] [ key_file [ key_file ...] ]
++uftp_keymgt [ \-m ] [ key_file [ key_file ...] ]
+ 
+-uftp_keymgt [ -m ] -g key_size key_file
++uftp_keymgt [ \-m ] \-g key_size key_file
+ 
+-uftp_keymgt [ -m ] -d key_file
++uftp_keymgt [ \-m ] \-d key_file
+ 
  .SH DESCRIPTION
  .P
- uftpproxyd is the proxy daemon of the UFTP suite.  It performs multicast tunneling, NAT traversal, and client response aggregation.  It is used in one of two scenarios.  The first is when the server and one or more clients are on separate networks and cannot be reached directly via multicast, and/or one or both sides are behind a firewall or NAT\(aqed.  This allows applications to function when there is little to no access to routers.  The second is when the server can contact clients directly but there are too many of them to directly handle the responses.  This allows greater scalability.
-@@ -148,7 +148,7 @@
- x  | Client |  | Client |  x || x  | Client |  | Client |  x
- x  ----------  ----------  x || x  ----------  ----------  x
- x       |           |      x || x       |           |      x
--x       -------------------x-||-x--------------------      x
-+x       ------------------\-x-||\-x--------------------      x
- x                          x    x                          x
- xxxxxxxxxxxxxxxxxxxxxxxxxxxx    xxxxxxxxxxxxxxxxxxxxxxxxxxxx
- .fi
-@@ -162,7 +162,7 @@
- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
- x                Network A   x
- x   ----------               x
--x ->| Server |<--------------x----------------
-+x ->| Server |<-------------\-x----------------
- x | ----------               x               |
- x |      |                   x               |
- x |      |  multicast        x               |
-@@ -181,7 +181,7 @@
- x | |  ------------------  x    x  |   ------------------  x
- x | |    |       ^         x    x  |           ^           x
- x |/|\\----       |         x    x  |           |           x
--x   |            |         x  --x-/|\\-----------           x
-+x   |            |         x  -\-x-/|\\-----------           x
- x   |            |         x  | x  |                       x
- x   |            |         x  | x  |                       x
- xxxxxxxxxxxxxxxxxxxxxxxxxxxx  | xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-@@ -198,9 +198,9 @@
- x  | Client |  | Client |  x || x  | Client |  | Client |  x
- x  ----------  ----------  x || x  ----------  ----------  x
- x       |           |      x || x       |           |      x
--x       -------------------x-||-x--------------------      x
-+x       ------------------\-x-||\-x--------------------      x
- x                          x    x                          x
--xxxxxxxxxxxxxxxxxxxxxxxxxxxx    xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-+xxxxxxxxxxxxxxxxxxxxxxxxxxxx    xxxxxxxxxxxxxxxxxxxxxxxxxxxx.\"
- .fi
+@@ -18,11 +18,11 @@
  
+ All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, key_file specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).
+ 
+-The -g option is used to generate a key of a given size and store it in the given key_file.  The key size and key fingerprint are then printed.  Under OpenSSL, a key can actually be generated by the openssl(1) command line utility, although you\(aqll still need to run uftp_keymgt on it to see the fingerprint.
++The \-g option is used to generate a key of a given size and store it in the given key_file.  The key size and key fingerprint are then printed.  Under OpenSSL, a key can actually be generated by the openssl(1) command line utility, although you\(aqll still need to run uftp_keymgt on it to see the fingerprint.
+ 
+-The -d option is available only on Windows systems using CryptoAPI.  It deletes the key container specified by key_file.
++The \-d option is available only on Windows systems using CryptoAPI.  It deletes the key container specified by key_file.
+ 
+-When neither -g or -d are specified, the size and fingerprint of all keys listed are printed.  If no keys are specified under Windows with CryptoAPI, the private key for all key containers for the current user are printed.  Note that some key containers may exist that an application other than UFTP is using, and some of those may not have an RSA private key.
++When neither \-g or \-d are specified, the size and fingerprint of all keys listed are printed.  If no keys are specified under Windows with CryptoAPI, the private key for all key containers for the current user are printed.  Note that some key containers may exist that an application other than UFTP is using, and some of those may not have an RSA private key.
+ 
+ .SH OPTIONS
  .P
-@@ -211,16 +211,16 @@
- The following options are supported:
- .TP
- .B \-s { dest | fp=fingerprint }
--Sets up the proxy as a server proxy.  If dest is specified, this is the name/IP of the downstream client proxy.  If fingerprint is specified, this designates the public key signature of the downstream proxy.  When this proxy gets a heartbeat message signed with the matching key, it will use the source IP:port of the heartbeat for its downstream address.  Exactly one of -s, -c, or -r must be specified.
-+Sets up the proxy as a server proxy.  If dest is specified, this is the name/IP of the downstream client proxy.  If fingerprint is specified, this designates the public key signature of the downstream proxy.  When this proxy gets a heartbeat message signed with the matching key, it will use the source IP:port of the heartbeat for its downstream address.  Exactly one of \-s, \-c, or \-r must be specified.
- .TP
- .B \-c
--Sets up the proxy as a client proxy.  Exactly one of -s, -c, or -r must be specified.
-+Sets up the proxy as a client proxy.  Exactly one of \-s, \-c, or \-r must be specified.
- .TP
- .B \-r
--Sets up the proxy as a response proxy.  Exactly one of -s, -c, or -r must be specified.
-+Sets up the proxy as a response proxy.  Exactly one of \-s, \-c, or \-r must be specified.
- .TP
- .B \-d
--Enable debug mode.  The process will run in the foreground and all output will go to stderr.  If specified, the -L option is ignored.
-+Enable debug mode.  The process will run in the foreground and all output will go to stderr.  If specified, the \-L option is ignored.
- .TP
- .B \-n
- Prevents name lookups of servers, clients, or other proxies when receiving messages.  Useful if name resolution takes a long time and delays message forwarding.  This option does NOT prevent name lookups for clients, servers, or proxies specified by any other command line options.
-@@ -249,11 +249,11 @@
- .B \-x log_level
- Specifies current logging level.  Valid values are 0-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
- .TP
--.B -H hb_server[:port][,hb_server[:port]...]
--Lists one or more proxies to send heartbeat messages to.  When sending a signed heartbeat message, the first key listed under -k is used to sign the message.  If port is not specified for a given proxy, the default port of 1044 is assumed.
-+.B \-H hb_server[:port][,hb_server[:port]...]
-+Lists one or more proxies to send heartbeat messages to.  When sending a signed heartbeat message, the first key listed under \-k is used to sign the message.  If port is not specified for a given proxy, the default port of 1044 is assumed.
- .TP
--.B -h hb_interval
--The time in seconds between sending heartbeat messages.  Ignored if -H is not specified.
-+.B \-h hb_interval
-+The time in seconds between sending heartbeat messages.  Ignored if \-H is not specified.
- .TP
- .B \-B buf_size
- The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536-104857600 (64KB-100MB).  Defaults to 262144.
-@@ -265,7 +265,7 @@
- Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
- 
- On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
--
-+.na
- HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
- 
- Not currently supported on Windows Vista or later.
-@@ -282,9 +282,9 @@
- .fi
- .TP
- .B \-S serverlist_file
--A file containing a list of servers.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  For client proxies, this is the list of servers the proxy will allow to connect, and the key specified by the server must match the fingerprint.  For server proxies, ff your system supports source specific multicast (SSM), the proxy will subscribe to all public and private multicast addresses using SSM for all servers listed.  See -C for the syntax of the file.
-+A file containing a list of servers.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  For client proxies, this is the list of servers the proxy will allow to connect, and the key specified by the server must match the fingerprint.  For server proxies, ff your system supports source specific multicast (SSM), the proxy will subscribe to all public and private multicast addresses using SSM for all servers listed.  See \-C for the syntax of the file.
- 
--When this option is specified, the public address given by -M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0-232.255.255.255.
-+When this option is specified, the public address given by \-M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0-232.255.255.255.
- 
- .TP
- .B \-k keyfile[,keyfile...]
-@@ -292,19 +292,19 @@
- .B \-K new_key_length
- These two options are used to read and/or write the proxy\(aqs RSA private key.
- 
--If neither -k nor -K are specified, an RSA private key 512 bytes in length is generated.
-+If neither \-k nor \-K are specified, an RSA private key 512 bytes in length is generated.
- 
--If -k is specified but not -K, the RSA private keys are read from each keyfile.
-+If \-k is specified but not \-K, the RSA private keys are read from each keyfile.
- 
--If -k is not specified but -K is, an RSA private key new_key_length bytes in length is generated.
-+If \-k is not specified but \-K is, an RSA private key new_key_length bytes in length is generated.
- 
--If both -k and -K are specified, an RSA private key new_key_length bytes in length is generated and stored in the first keyfile, and subsequent key files are ignored.
-+If both \-k and \-K are specified, an RSA private key new_key_length bytes in length is generated and stored in the first keyfile, and subsequent key files are ignored.
- 
- The definition of keyfile is dependent on the crypto library UFTP is compiled to use.
- 
--On Windows systems using the native crypto library (CryptoAPI), all RSA private keys must be stored in a key container (technically only keys used to sign data, but for UFTP\(aqs purposes this is the case).  Key containers are internal to Windows, and each user (and the system) has its own set of key containers.  In this case, keyfile is actually the name of the key container.  When -k is not specified, the generated key is stored in a default key container.  Note that if more than one server, client, and/or proxy use this default key container on the same machine, they will interfere with each other and the results are undefined.
-+On Windows systems using the native crypto library (CryptoAPI), all RSA private keys must be stored in a key container (technically only keys used to sign data, but for UFTP\(aqs purposes this is the case).  Key containers are internal to Windows, and each user (and the system) has its own set of key containers.  In this case, keyfile is actually the name of the key container.  When \-k is not specified, the generated key is stored in a default key container.  Note that if more than one server, client, and/or proxy use this default key container on the same machine, they will interfere with each other and the results are undefined.
- 
--All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, keyfile specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).  When both -k and -K are specified, the file is only written to if it does not currently exist.  If the file does exist, an error message will be returned and the proxy will exit.  When -k is not specified, the generated key is not persisted.  Unlike CryptoAPI, servers, clients, and proxies will not step on each other in this case.  These PEM files may also be manipulated via the openssl(1) command line tool.
-+All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, keyfile specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).  When both \-k and \-K are specified, the file is only written to if it does not currently exist.  If the file does exist, an error message will be returned and the proxy will exit.  When \-k is not specified, the generated key is not persisted.  Unlike CryptoAPI, servers, clients, and proxies will not step on each other in this case.  These PEM files may also be manipulated via the openssl(1) command line tool.
- 
- Keys can also be generated and viewed via the uftp_keymgt(1) utility.
- .TP
-Index: uftp-3.5.1/uftpd.1
+Index: uftp-3.6.1/uftpd.1
 ===================================================================
---- uftp-3.5.1.orig/uftpd.1	2011-12-18 23:21:48.818686014 -0800
-+++ uftp-3.5.1/uftpd.1	2011-12-18 23:23:01.438319027 -0800
-@@ -1,16 +1,16 @@
- .TH uftpd 1 "10 July 2011" "UFTP 3.5.1"
+--- uftp-3.6.1.orig/uftpd.1	2012-01-07 12:01:06.507804235 -0800
++++ uftp-3.6.1/uftpd.1	2012-01-07 12:01:11.367785081 -0800
+@@ -2,16 +2,16 @@
  .SH NAME
--uftpd - Encrypted UDP based ftp with multicast - client daemon
-+uftpd \- Encrypted UDP based ftp with multicast \- client daemon
+ uftpd - Encrypted UDP based ftp with multicast - client daemon
  .SH SYNOPSIS
 -uftpd [ -d ] [ -n ] [ -p port ] [ -B buf_size ]
 -    [ -E ] [ -Q dscp ] [ -U UID ] [ -x log_level ] [ -t ]
@@ -437,7 +385,8 @@ Index: uftp-3.5.1/uftpd.1
 -    [ -A backup_dir[,backup_dir... ]] [ -L logfile ]
 -    [ -P pidfile ] [ -S serverlist_file ] [ -R proxy[/fp] ]
 -    [ -k keyfile[,keyfile...] ] [ -K new_key_length ]
--    [ -m ] [ -H hb_server[:port][,hb_server[:port]...] ]
+-    [ -m ] [ -N priority ]
+-    [ -H hb_server[:port][,hb_server[:port]...] ]
 -    [ -h hb_interval ] [ -I interface[,interface...] ]
 -    [ -M pub_mcast_addr[,pub_mcast_addr...] ]
 +uftpd [ \-d ] [ \-n ] [ \-p port ] [ \-B buf_size ]
@@ -446,13 +395,14 @@ Index: uftp-3.5.1/uftpd.1
 +    [ \-A backup_dir[,backup_dir... ]] [ \-L logfile ]
 +    [ \-P pidfile ] [ \-S serverlist_file ] [ \-R proxy[/fp] ]
 +    [ \-k keyfile[,keyfile...] ] [ \-K new_key_length ]
-+    [ \-m ] [ \-H hb_server[:port][,hb_server[:port]...] ]
++    [ \-m ] [ \-N priority ]
++    [ \-H hb_server[:port][,hb_server[:port]...] ]
 +    [ \-h hb_interval ] [ \-I interface[,interface...] ]
 +    [ \-M pub_mcast_addr[,pub_mcast_addr...] ]
  .SH DESCRIPTION
  .P
  uftpd is the client daemon of the UFTP suite.  It listens on one or more multicast addresses to receive files from servers.
-@@ -22,7 +22,7 @@
+@@ -23,7 +23,7 @@
  The following options are supported:
  .TP
  .B \-d
@@ -461,17 +411,31 @@ Index: uftp-3.5.1/uftpd.1
  .TP
  .B \-n
  Prevents name lookups of the server.  Useful if name resolution takes a long time and delays sending of the registration message.
-@@ -43,7 +43,7 @@
- Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
+@@ -35,32 +35,32 @@
+ The unique ID for this client.  May be specified either as a 6 digit hexadecimal number (0xnnnnnn) or as an IP address of the form 0.n.n.n.
+ .TP
+ .B \-B buf_size
+-The size in bytes of the UDP receive buffer to use.  Valid values are 65536-104857600 (64KB-100MB).  Defaults to 262144.
++The size in bytes of the UDP receive buffer to use.  Valid values are 65536\(hy104857600 (64KB\(hy100MB).  Defaults to 262144.
+ .TP
+ .B \-E
+ Only allow incoming sessions if encryption is enabled.  Default is to allow both encrypted and unencrypted sessions.
+ .TP
+ .B \-Q dscp
+-Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
++Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0\(hy63 and may be specified in either decimal or hexadecimal.  Default is 0.
  
  On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
 -
 +.na
  HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\DisableUserTOSSetting
- 
+-
++.ad
  Not currently supported on Windows Vista or later.
-@@ -52,14 +52,14 @@
- Specifies current logging level.  Valid values are 0-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
+ .TP
+ .B \-x log_level
+-Specifies current logging level.  Valid values are 0-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
++Specifies current logging level.  Valid values are 0\(hy5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
  .TP
  .B \-t
 -Receive each file into a temp file in the same directory as the destination file.  The temp file will have an extension of .~uftp-{group-id}-{file-id}, where {group-id} and {file-id} are the group ID of the current session and file ID of the current file.  If -A is also specified, the existing destination file is not moved to backup directory until after the file is fully received.
@@ -488,7 +452,7 @@ Index: uftp-3.5.1/uftpd.1
  
  IMPORTANT: When full directories are received, the entire directory is moved at once to the destination directory, removing any existing file/directory.  This means that if an existing directory in dest_dir is the same name as a directory received into temp_dir, all files under the existing directory are deleted. 
  .TP
-@@ -71,7 +71,7 @@
+@@ -72,7 +72,7 @@
  
  For example, if /full/path/to/file would be overwritten, it is moved to {backup_dir}/YYYYMMDD/HHMMSS/full/path/to/file.  Under Windows, drive letters for local files are not part of the name, but host/share names for network files are.  So C:\\path\\to\\file would be backed up to {backup_dir}\\YYYYMMDD\\HHMMSS\\path\\to\\file, and \\\\host\\share\\path\\to\\file would be backed up to {backup_dir}\\YYYYMMDD\\HHMMSS\\host\\share\\path\\to\\file.
  
@@ -497,16 +461,16 @@ Index: uftp-3.5.1/uftpd.1
  .TP
  .B \-L logfile
  Specifies the log file.  Default is /tmp/uftpd.log for UNIX-like systems systems, C:\\uftpd_log.txt for Windows.
-@@ -82,7 +82,7 @@
+@@ -83,7 +83,7 @@
  .B \-S serverlist_file
  A file containing a list of servers the client will allow to send files to it.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  If a key fingerprint is given, the key specified by the server must match the fingerprint.  If your system supports source specific multicast (SSM), the client will subscribe to all public and private multicast addresses using SSM for all servers listed.
  
 -When this option is specified, the public address given by -M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0-232.255.255.255.
-+When this option is specified, the public address given by \-M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0-232.255.255.255.
++When this option is specified, the public address given by \-M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0\(hy232.255.255.255.
  
  .nf
  Example contents:
-@@ -100,31 +100,31 @@
+@@ -101,19 +101,19 @@
  .B \-K new_key_length
  These two options are used to read and/or write the client\(aqs RSA private key.
  
@@ -532,8 +496,25 @@ Index: uftp-3.5.1/uftpd.1
  
  Keys can also be generated and viewed via the uftp_keymgt(1) utility.
  .TP
- .B \-m
+@@ -121,24 +121,24 @@
  For Windows systems using CryptoAPI, private keys are normally stored in the key container of the running user.  Specifying this option stores keys in the system key container.  Useful when running as a service.  On non-Windows systems, this option has no effect.
+ .TP
+ .B \-N priority
+-Sets the process priority.  On Windows systems, valid values are from -2 to 2, with a default of 0.  These correspond to the following priorities:
++Sets the process priority.  On Windows systems, valid values are from \-2 to 2, with a default of 0.  These correspond to the following priorities:
+ 
+ .nf
+--2 High
+--1 Above Normal
++\-2 High
++\-1 Above Normal
+  0 Normal
+  1 Below Normal
+  2 Low
+ .fi
+ 
+-On all other systems, this is the "nice" value.  Valid values are from -20 to 19, where -20 is the highest priority and 19 is the lowest priority.  Default is 0.
++On all other systems, this is the "nice" value.  Valid values are from \-20 to 19, where \-20 is the highest priority and 19 is the lowest priority.  Default is 0.
  .TP
 -.B -H hb_server[:port][,hb_server[:port]...]
 +.B \-H hb_server[:port][,hb_server[:port]...]
@@ -548,7 +529,7 @@ Index: uftp-3.5.1/uftpd.1
  .TP
  .B \-I interface[,interface...]
  Lists one or more interfaces to listen to multicast traffic on.  Interfaces can be specified either by interface name, by hostname, or by IP.  When receiving a closed group membership request, the client will participate if any of these interfaces matches an IP in the announcement.  When receiving an open group membership request, the first interface listed is the one the client will report back to the server.  This may not necessarily be the interface that the ANNOUNCE was received on.  The default is to listen on all active non-loopback interfaces.  NOTE: Since Windows doesn\(aqt have named interfaces (not in the sense that UNIX-like systems do), only hostnames or IP addresses are accepted on Windows.
-@@ -144,25 +144,25 @@
+@@ -158,25 +158,25 @@
  Suppose you want an external process to handle incoming files in /tmp/dest.  Since you don\(aqt want to pick up incomplete files, you might want them to be received into /tmp/receiving then moved to /tmp/dest when done.  Then call the client like this:
  
  .RS 5
@@ -578,39 +559,165 @@ Index: uftp-3.5.1/uftpd.1
  .RE
  
  .SH SEE ALSO
-Index: uftp-3.5.1/uftp_keymgt.1
+Index: uftp-3.6.1/uftpproxyd.1
 ===================================================================
---- uftp-3.5.1.orig/uftp_keymgt.1	2011-12-18 23:21:48.858685810 -0800
-+++ uftp-3.5.1/uftp_keymgt.1	2011-12-18 23:21:53.868660483 -0800
-@@ -1,12 +1,12 @@
- .TH uftp_keymgt 1 "10 July 2011" "UFTP 3.5.1"
+--- uftp-3.6.1.orig/uftpproxyd.1	2012-01-07 12:01:15.387769158 -0800
++++ uftp-3.6.1/uftpproxyd.1	2012-01-07 12:01:22.167742145 -0800
+@@ -2,17 +2,17 @@
  .SH NAME
--uftp_keymgt - Encrypted UDP based ftp with multicast - key management utility
-+uftp_keymgt \- Encrypted UDP based ftp with multicast \- key management utility
+ uftpproxyd - Encrypted UDP based ftp with multicast - proxy daemon
  .SH SYNOPSIS
--uftp_keymgt [ -m ] [ key_file [ key_file ...] ]
-+uftp_keymgt [ \-m ] [ key_file [ key_file ...] ]
- 
--uftp_keymgt [ -m ] -g key_size key_file
-+uftp_keymgt [ \-m ] \-g key_size key_file
- 
--uftp_keymgt [ -m ] -d key_file
-+uftp_keymgt [ \-m ] \-d key_file
- 
+-uftpproxyd { -s { dest | fp=fingerprint } | -c | -r } [ -d ]
+-    [ -n ] [ -p port ] [ -t ttl ] [ -Q dscp ]
+-    [ -N priority ] [ -O out_multi_interface ]
+-    [ -U UID ] [ -q dest_port ]
+-    [ -T interval_pct ] [ -m ] [ -x log_level ]
+-    [ -H hb_server[:port][,hb_server[:port]...] ]
+-    [ -h hb_interval ] [ -B udp_buf_size ] [ -L logfile ]
+-    [ -P pidfile ] [ -C clientlist_file ]
+-    [ -S serverlist_file ] [ -k keyfile[,keyfile...] ]
+-    [ -K new_key_length ] [ -I interface[,interface...] ]
+-    [ -M pub_mcast_addr[,pub_mcast_addr...] ]
++uftpproxyd { \-s { dest | fp=fingerprint } | \-c | \-r } [ \-d ]
++    [ \-n ] [ \-p port ] [ \-t ttl ] [ \-Q dscp ]
++    [ \-N priority ] [ \-O out_multi_interface ]
++    [ \-U UID ] [ \-q dest_port ]
++    [ \-T interval_pct ] [ \-m ] [ \-x log_level ]
++    [ \-H hb_server[:port][,hb_server[:port]...] ]
++    [ \-h hb_interval ] [ \-B udp_buf_size ] [ \-L logfile ]
++    [ \-P pidfile ] [ \-C clientlist_file ]
++    [ \-S serverlist_file ] [ \-k keyfile[,keyfile...] ]
++    [ \-K new_key_length ] [ \-I interface[,interface...] ]
++    [ \-M pub_mcast_addr[,pub_mcast_addr...] ]
  .SH DESCRIPTION
  .P
-@@ -18,11 +18,11 @@
+ uftpproxyd is the proxy daemon of the UFTP suite.  It performs multicast tunneling, NAT traversal, and client response aggregation.  It is used in one of two scenarios.  The first is when the server and one or more clients are on separate networks and cannot be reached directly via multicast, and/or one or both sides are behind a firewall or NAT\(aqed.  This allows applications to function when there is little to no access to routers.  The second is when the server can contact clients directly but there are too many of them to directly handle the responses.  This allows greater scalability.
+@@ -181,8 +181,8 @@
+ x | |  | Response Proxy |  x    x  |   | Response Proxy |  x
+ x | |  ------------------  x    x  |   ------------------  x
+ x | |    |       ^         x    x  |           ^           x
+-x |/|\\----       |         x    x  |           |           x
+-x   |            |         x  --x-/|\\-----------           x
++x |/|\----       |         x    x  |           |           x
++x   |            |         x  -\-x-/|\-----------           x
+ x   |            |         x  | x  |                       x
+ x   |            |         x  | x  |                       x
+ xxxxxxxxxxxxxxxxxxxxxxxxxxxx  | xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+@@ -212,16 +212,16 @@
+ The following options are supported:
+ .TP
+ .B \-s { dest | fp=fingerprint }
+-Sets up the proxy as a server proxy.  If dest is specified, this is the name/IP of the downstream client proxy.  If fingerprint is specified, this designates the public key signature of the downstream proxy.  When this proxy gets a heartbeat message signed with the matching key, it will use the source IP:port of the heartbeat for its downstream address.  Exactly one of -s, -c, or -r must be specified.
++Sets up the proxy as a server proxy.  If dest is specified, this is the name/IP of the downstream client proxy.  If fingerprint is specified, this designates the public key signature of the downstream proxy.  When this proxy gets a heartbeat message signed with the matching key, it will use the source IP:port of the heartbeat for its downstream address.  Exactly one of \-s, \-c, or \-r must be specified.
+ .TP
+ .B \-c
+-Sets up the proxy as a client proxy.  Exactly one of -s, -c, or -r must be specified.
++Sets up the proxy as a client proxy.  Exactly one of \-s, \-c, or \-r must be specified.
+ .TP
+ .B \-r
+-Sets up the proxy as a response proxy.  Exactly one of -s, -c, or -r must be specified.
++Sets up the proxy as a response proxy.  Exactly one of \-s, \-c, or \-r must be specified.
+ .TP
+ .B \-d
+-Enable debug mode.  The process will run in the foreground and all output will go to stderr.  If specified, the -L option is ignored.
++Enable debug mode.  The process will run in the foreground and all output will go to stderr.  If specified, the \-L option is ignored.
+ .TP
+ .B \-n
+ Prevents name lookups of servers, clients, or other proxies when receiving messages.  Useful if name resolution takes a long time and delays message forwarding.  This option does NOT prevent name lookups for clients, servers, or proxies specified by any other command line options.
+@@ -233,17 +233,17 @@
+ Specifies the time-to-live for multicast packets.  Default is 1.
+ .TP
+ .B \-N priority
+-Sets the process priority.  On Windows systems, valid values are from -2 to 2, with a default of 0.  These correspond to the following priorities:
++Sets the process priority.  On Windows systems, valid values are from \-2 to 2, with a default of 0.  These correspond to the following priorities:
  
- All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, key_file specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).
+ .nf
+--2 High
+--1 Above Normal
++\-2 High
++\-1 Above Normal
+  0 Normal
+  1 Below Normal
+  2 Low
+ .fi
  
--The -g option is used to generate a key of a given size and store it in the given key_file.  The key size and key fingerprint are then printed.  Under OpenSSL, a key can actually be generated by the openssl(1) command line utility, although you\(aqll still need to run uftp_keymgt on it to see the fingerprint.
-+The \-g option is used to generate a key of a given size and store it in the given key_file.  The key size and key fingerprint are then printed.  Under OpenSSL, a key can actually be generated by the openssl(1) command line utility, although you\(aqll still need to run uftp_keymgt on it to see the fingerprint.
+-On all other systems, this is the "nice" value.  Valid values are from -20 to 19, where -20 is the highest priority and 19 is the lowest priority.  Default is 0.
++On all other systems, this is the "nice" value.  Valid values are from \-20 to 19, where \-20 is the highest priority and 19 is the lowest priority.  Default is 0.
+ .TP
+ .B \-O out_multi_interface
+ The interface to send the data from.  Can be specified either by interface name, by hostname, or by IP.  If not specified, the default system interface is used.  Applies only to client proxies.
+@@ -255,28 +255,28 @@
+ The port number of the downstream proxy (for server proxies) or clients (for client proxies).
+ .TP
+ .B \-T interval_pct
+-Specifies the percentage of the announce interval (for REGISTERs) or status interval (for STATUSes or COMPLETEs) to wait after receiving the first client response before sending an aggregate response upstream.  Valid values are 10-99.  Defaults to 50.  Applies only to client proxies.
++Specifies the percentage of the announce interval (for REGISTERs) or status interval (for STATUSes or COMPLETEs) to wait after receiving the first client response before sending an aggregate response upstream.  Valid values are 10\(hy99.  Defaults to 50.  Applies only to client proxies.
+ .TP
+ .B \-m
+ For Windows systems using CryptoAPI, private keys are normally stored in the key container of the running user.  Specifying this option stores keys in the system key container.  Useful when running as a service.  On non-Windows systems, this option has no effect.
+ .TP
+ .B \-x log_level
+-Specifies current logging level.  Valid values are 0-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
++Specifies current logging level.  Valid values are 0\-5, with 0 being the least verbose and 5 being the most verbose.  Default is 2, which is consistent with logging prior to version 3.5.
+ .TP
+-.B -H hb_server[:port][,hb_server[:port]...]
+-Lists one or more proxies to send heartbeat messages to.  When sending a signed heartbeat message, the first key listed under -k is used to sign the message.  If port is not specified for a given proxy, the default port of 1044 is assumed.
++.B \-H hb_server[:port][,hb_server[:port]...]
++Lists one or more proxies to send heartbeat messages to.  When sending a signed heartbeat message, the first key listed under \-k is used to sign the message.  If port is not specified for a given proxy, the default port of 1044 is assumed.
+ .TP
+-.B -h hb_interval
+-The time in seconds between sending heartbeat messages.  Ignored if -H is not specified.
++.B \-h hb_interval
++The time in seconds between sending heartbeat messages.  Ignored if \-H is not specified.
+ .TP
+ .B \-B buf_size
+-The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536-104857600 (64KB-100MB).  Defaults to 262144.
++The size in bytes of the UDP send buffer and receive buffer to use.  Valid values are 65536\(hy104857600 (64KB\(hy100MB).  Defaults to 262144.
+ .TP
+ .B \-L logfile
+ Specifies the log file.  Default is /tmp/uftpproxyd.log for UNIX-like systems systems, C:\\uftpproxyd_log.txt for Windows.
+ .TP
+ .B \-Q dscp
+-Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0-63 and may be specified in either decimal or hexadecimal.  Default is 0.
++Specifies the Differentiated Services Code Point (DSCP), formerly Type of Service (TOS), in the IP header for all outgoing packets.  Valid values are 0\(hy63 and may be specified in either decimal or hexadecimal.  Default is 0.
  
--The -d option is available only on Windows systems using CryptoAPI.  It deletes the key container specified by key_file.
-+The \-d option is available only on Windows systems using CryptoAPI.  It deletes the key container specified by key_file.
+ On Windows XP systems, the OS doesn\(aqt allow this parameter to be changed by default.  To change this, add/modify the following DWORD registry value, set to 0, and reboot:
+ .na
+@@ -296,9 +296,9 @@
+ .fi
+ .TP
+ .B \-S serverlist_file
+-A file containing a list of servers.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  For client proxies, this is the list of servers the proxy will allow to connect, and the key specified by the server must match the fingerprint.  For server proxies, ff your system supports source specific multicast (SSM), the proxy will subscribe to all public and private multicast addresses using SSM for all servers listed.  See -C for the syntax of the file.
++A file containing a list of servers.  The file should contain the name/IP of a server optionally followed by the server\(aqs public key fingerprint, with one on each line.  For client proxies, this is the list of servers the proxy will allow to connect, and the key specified by the server must match the fingerprint.  For server proxies, ff your system supports source specific multicast (SSM), the proxy will subscribe to all public and private multicast addresses using SSM for all servers listed.  See \-C for the syntax of the file.
  
--When neither -g or -d are specified, the size and fingerprint of all keys listed are printed.  If no keys are specified under Windows with CryptoAPI, the private key for all key containers for the current user are printed.  Note that some key containers may exist that an application other than UFTP is using, and some of those may not have an RSA private key.
-+When neither \-g or \-d are specified, the size and fingerprint of all keys listed are printed.  If no keys are specified under Windows with CryptoAPI, the private key for all key containers for the current user are printed.  Note that some key containers may exist that an application other than UFTP is using, and some of those may not have an RSA private key.
+-When this option is specified, the public address given by -M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0-232.255.255.255.
++When this option is specified, the public address given by \-M must be a valid SSM address.  Any ANNOUNCE that specifies a private IP that is not a valid SSM address will be rejected.  Valid SSM addresses are in the range 232.0.0.0\(hy232.255.255.255.
  
- .SH OPTIONS
- .P
+ .TP
+ .B \-k keyfile[,keyfile...]
+@@ -306,19 +306,19 @@
+ .B \-K new_key_length
+ These two options are used to read and/or write the proxy\(aqs RSA private key.
+ 
+-If neither -k nor -K are specified, an RSA private key 512 bytes in length is generated.
++If neither \-k nor \-K are specified, an RSA private key 512 bytes in length is generated.
+ 
+-If -k is specified but not -K, the RSA private keys are read from each keyfile.
++If \-k is specified but not \-K, the RSA private keys are read from each keyfile.
+ 
+-If -k is not specified but -K is, an RSA private key new_key_length bytes in length is generated.
++If \-k is not specified but \-K is, an RSA private key new_key_length bytes in length is generated.
+ 
+-If both -k and -K are specified, an RSA private key new_key_length bytes in length is generated and stored in the first keyfile, and subsequent key files are ignored.
++If both \-k and \-K are specified, an RSA private key new_key_length bytes in length is generated and stored in the first keyfile, and subsequent key files are ignored.
+ 
+ The definition of keyfile is dependent on the crypto library UFTP is compiled to use.
+ 
+-On Windows systems using the native crypto library (CryptoAPI), all RSA private keys must be stored in a key container (technically only keys used to sign data, but for UFTP\(aqs purposes this is the case).  Key containers are internal to Windows, and each user (and the system) has its own set of key containers.  In this case, keyfile is actually the name of the key container.  When -k is not specified, the generated key is stored in a default key container.  Note that if more than one server, client, and/or proxy use this default key container on the same machine, they will interfere with each other and the results are undefined.
++On Windows systems using the native crypto library (CryptoAPI), all RSA private keys must be stored in a key container (technically only keys used to sign data, but for UFTP\(aqs purposes this is the case).  Key containers are internal to Windows, and each user (and the system) has its own set of key containers.  In this case, keyfile is actually the name of the key container.  When \-k is not specified, the generated key is stored in a default key container.  Note that if more than one server, client, and/or proxy use this default key container on the same machine, they will interfere with each other and the results are undefined.
+ 
+-All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, keyfile specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).  When both -k and -K are specified, the file is only written to if it does not currently exist.  If the file does exist, an error message will be returned and the proxy will exit.  When -k is not specified, the generated key is not persisted.  Unlike CryptoAPI, servers, clients, and proxies will not step on each other in this case.  These PEM files may also be manipulated via the openssl(1) command line tool.
++All other systems use OpenSSL for the crypto library (although under Windows UFTP can be also be built to use it).  In this case, keyfile specifies a file name where the RSA private key is stored unencrypted in PEM format (the OS is expected to protect this file).  When both \-k and \-K are specified, the file is only written to if it does not currently exist.  If the file does exist, an error message will be returned and the proxy will exit.  When \-k is not specified, the generated key is not persisted.  Unlike CryptoAPI, servers, clients, and proxies will not step on each other in this case.  These PEM files may also be manipulated via the openssl(1) command line tool.
+ 
+ Keys can also be generated and viewed via the uftp_keymgt(1) utility.
+ .TP
